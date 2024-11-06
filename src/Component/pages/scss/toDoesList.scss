@@ -1,0 +1,45 @@
+$primary-bg-color: #303540;
+$box-shadow-color: #929292;
+$border-radius: 7px;
+$gap-size: 20px;
+$container-padding: 10px;
+
+.to-does-list-container {
+  width: inherit;
+  border-radius: $border-radius;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  gap: $gap-size;
+
+  .to-does-list {
+    width: 47%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: flex-start;
+    background: $primary-bg-color;
+    box-shadow: inset 0 0 10px $box-shadow-color;
+    border-radius: $border-radius;
+    flex-wrap: wrap;
+    gap: $gap-size / 2;
+    padding: $container-padding $container-padding ($container-padding * 2)
+      $container-padding;
+
+    .container {
+      margin-left: 5px;
+    }
+    @media screen and (min-width: 1025px) {
+      width: 46%;
+    }
+    // Responsive adjustments
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      width: 45%;
+    }
+  }
+}

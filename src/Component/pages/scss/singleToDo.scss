@@ -1,0 +1,40 @@
+.single-to-do {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 85%;
+  background: #565f71;
+  box-shadow: inset 0 0 23px #929292;
+  border-radius: 7px;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  .single-to-do-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+  }
+  .single-to-do-icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 0px 10px;
+    gap: 10px;
+  }
+  .inputField {
+    width: 75%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: #f0f8ff;
+    font-size: 15px;
+    &:focus {
+      border-bottom: 1px solid white;
+      outline: none;
+    }
+  }
+}
