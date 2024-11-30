@@ -6,6 +6,7 @@ import About from "./Component/navPages/About";
 import OrderSummery from "./Component/pages/OrderSummery";
 import "./App.scss";
 import ToDoes from "./Component/pages/todo/ToDoes";
+import EmployeeDetabaseIndex from "./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex";
 
 const route = createBrowserRouter([
   {
@@ -37,6 +38,16 @@ const route = createBrowserRouter([
           {
             path: "toDoes",
             element: <ToDoes />,
+            errorElement: (
+              <>
+                <h3> Opps!...</h3>
+                <p> Found Some thing issue in To does page....404</p>
+              </>
+            ),
+          },
+          {
+            path: "employeeDatabese",
+            element: <EmployeeDetabaseIndex />,
             errorElement: (
               <>
                 <h3> Opps!...</h3>

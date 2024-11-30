@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 
 interface InputProps {
   //   ref: unknown;
+  id?: string;
   className: string;
   inputType: string | undefined;
   name?: string | undefined;
@@ -11,11 +12,14 @@ interface InputProps {
   onChangeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   // autoComplete?: boolean;
   ref?: React.LegacyRef<HTMLInputElement> | undefined;
+  required?: boolean | undefined;
+  pattern?: any;
 }
 
 const InputField: React.FC<InputProps> = forwardRef(
   (
     {
+      id,
       inputType,
       name,
       value,
@@ -24,12 +28,14 @@ const InputField: React.FC<InputProps> = forwardRef(
       onChangeInput,
       className,
       // autoComplete = false,
+      required,
     },
     ref
   ) => {
     return (
       <>
         <input
+          id={id}
           ref={ref}
           className={className}
           type={inputType}
@@ -38,6 +44,7 @@ const InputField: React.FC<InputProps> = forwardRef(
           placeholder={placeHolder}
           disabled={isDisabled}
           onChange={onChangeInput}
+          required={required}
           // autoComplete={autoComplete}
         />
       </>

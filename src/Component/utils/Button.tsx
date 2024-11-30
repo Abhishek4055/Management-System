@@ -12,20 +12,13 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = React.memo(
   ({
     children,
-    onClick,
     type = "button", // Default button type
     disabled = false,
     style,
-    className = "",
+    ...rest
   }) => {
     return (
-      <button
-        type={type}
-        disabled={disabled}
-        style={style}
-        className={className}
-        onClick={onClick}
-      >
+      <button disabled={disabled} style={style} {...rest}>
         {children}
       </button>
     );

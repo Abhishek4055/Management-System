@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../utils/Button";
 import "./pages.scss";
 
@@ -10,10 +10,10 @@ const Home: React.FC = () => {
     <>
       <h2>This is Home Component</h2>
       <div>
-        <Button className="scondery-btn" onClick={() => navigate("toDoes")}>
+        {/* <Button className="scondery-btn" onClick={() => navigate("toDoes")}>
           Clear here to Add the Does
         </Button>
-        <br />
+        <br /> */}
         <Button
           className="scondery-btn"
           onClick={() => navigate("order_summary")}
