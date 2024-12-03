@@ -1,7 +1,7 @@
 import React from "react";
 import { EmployeeListModel } from "../../modal";
 import styled from "styled-components";
-import { AiFillDelete } from "react-icons/ai";
+// import { AiFillDelete } from "react-icons/ai";
 
 function EmployeeList(props: {
   activeEmployee: number;
