@@ -8,6 +8,15 @@ import "./App.scss";
 import ToDoes from "./Component/pages/todo/ToDoes";
 import EmployeeDetabaseIndex from "./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex";
 
+// Reusable error component
+const ErrorPage: React.FC<{ message: string }> = ({ message }) => (
+  <>
+    <h3>Oops!...</h3>
+    <p>{message}</p>
+  </>
+);
+
+// Routes configuration
 const route = createBrowserRouter([
   {
     path: "/",
@@ -19,76 +28,46 @@ const route = createBrowserRouter([
         </div>
       </div>
     ),
+    errorElement: (
+      <ErrorPage message="Found something wrong in the main page...404" />
+    ),
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/",
-        children: [
-          { index: true, element: <Home /> },
-          {
-            path: "order_summary",
-            element: <OrderSummery />,
-            errorElement: (
-              <>
-                <h3> Opps!...</h3>
-                <p> Found Some thing issue in order pages....404</p>
-              </>
-            ),
-          },
-          {
-            path: "toDoes",
-            element: <ToDoes />,
-            errorElement: (
-              <>
-                <h3> Opps!...</h3>
-                <p> Found Some thing issue in To does page....404</p>
-              </>
-            ),
-          },
-          {
-            path: "employeeDatabese",
-            element: <EmployeeDetabaseIndex />,
-            errorElement: (
-              <>
-                <h3> Opps!...</h3>
-                <p> Found Some thing issue in To does page....404</p>
-              </>
-            ),
-          },
-        ],
+        path: "order_summary",
+        element: <OrderSummery />,
         errorElement: (
-          <>
-            <h3> Opps!... </h3>
-            <p> Found Some thing issue in home page....404</p>
-          </>
+          <ErrorPage message="Found something wrong on the order page...404" />
         ),
       },
-
+      {
+        path: "toDoes",
+        element: <ToDoes />,
+        errorElement: (
+          <ErrorPage message="Found something wrong on the To-Does page...404" />
+        ),
+      },
+      {
+        path: "employeeDatabese",
+        element: <EmployeeDetabaseIndex />,
+        errorElement: (
+          <ErrorPage message="Found something wrong on the Employee Database page...404" />
+        ),
+      },
       {
         path: "about",
         element: <About />,
         errorElement: (
-          <>
-            <h3> Opps!...</h3>
-            <p> Found Some thing issue....404</p>
-          </>
+          <ErrorPage message="Found something wrong on the About page...404" />
         ),
       },
     ],
-    errorElement: (
-      <>
-        <h3> Opps!...</h3>
-        <p> Found Some thing issue main page....404</p>
-      </>
-    ),
   },
 ]);
+
+// Main App component
 const App: React.FC = () => {
-  return (
-    <>
-      <RouterProvider router={route} />
-    </>
-  );
+  return <RouterProvider router={route} />;
 };
 
 export default App;

@@ -1,6 +1,7 @@
 import React from "react";
 import { EmployeeListModel } from "../../modal";
 import styled from "styled-components";
+import { AiFillDelete } from "react-icons/ai";
 
 function EmployeeList(props: {
   activeEmployee: number;
@@ -14,12 +15,11 @@ function EmployeeList(props: {
       <List onClick={employeeItemHandler} id="id">
         {employeeList?.map((item) => (
           <div
-            // className="employee__list_item  "
             className={`employee__list_item ${
               activeEmployee === item.id ? "active" : ""
             }`}
             key={item.id}
-            id={item.id.toString()}
+            id={item.id.toString() + "_" + "DIV"}
           >
             <span
               className="employee__list--item--text "
@@ -27,7 +27,12 @@ function EmployeeList(props: {
             >
               {item.fName + " " + item.lName}
             </span>
-            <button id={item.id.toString()}>❌</button>
+            <IconButton
+              className="employee__list--item--icon "
+              id={item.id.toString()}
+            >
+              <AiFillDelete />
+            </IconButton>
           </div>
         ))}
       </List>
@@ -91,16 +96,21 @@ const List = styled.div`
     &.active {
       color: #00ffbb;
       box-shadow: inset 0 0 10px #4ed697;
-    }
-    button {
-      padding: 5px;
-      //border-radius: 50%;
-      border: none;
-      background: none;
-      transition: 0.2s all;
-      &:hover {
-        transform: scale(1.5);
+      .employee__list--item--icon {
+        color: #f0f8ff;
       }
     }
+  }
+`;
+
+const IconButton = styled.span`
+  padding: 5px;
+  color: "#f0f8ff" !important;
+  border: none;
+  background: none;
+  transition: 0.2s all;
+  &:hover {
+    transform: scale(1.5);
+    color: #ff0000 !important;
   }
 `;
