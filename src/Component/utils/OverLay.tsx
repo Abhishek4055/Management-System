@@ -103,12 +103,3 @@ const CloseIconButton = styled.button`
     transform: rotate(360deg) scale(1.5);
   }
 `;
-
-const OverLayFooter = styled.div`
-  position: fixed;
-  bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
