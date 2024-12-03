@@ -19,17 +19,17 @@ function EmployeeList(props: {
               activeEmployee === item.id ? "active" : ""
             }`}
             key={item.id}
-            id={item.id.toString() + "_" + "user"}
+            id={`${item.id.toString()}_"user`}
           >
             <span
               className="employee__list--item--text "
-              id={item.id.toString() + "_" + "user"}
+              id={`${item.id.toString()}_"user`}
             >
               {item.fName + " " + item.lName}
             </span>
             <IconButton
               className="employee__list--item--icon "
-              id={item.id.toString() + "_" + "delete"}
+              id={`${item.id.toString()}_delete`}
             >
               ❌
               {/* <AiFillDelete id={item.id.toString() + "_" + "delete"} /> */}
