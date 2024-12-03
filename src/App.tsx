@@ -8,7 +8,7 @@ import "./App.scss";
 import ToDoes from "./Component/pages/todo/ToDoes";
 import EmployeeDetabaseIndex from "./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex";
 
-// Reusable error component
+// Error component
 const ErrorPage: React.FC<{ message: string }> = ({ message }) => (
   <>
     <h3>Oops!...</h3>
@@ -65,7 +65,6 @@ const route = createBrowserRouter([
   },
 ]);
 
-// Main App component
 const App: React.FC = () => {
   return <RouterProvider router={route} />;
 };
