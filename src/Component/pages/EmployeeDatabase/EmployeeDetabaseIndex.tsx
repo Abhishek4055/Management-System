@@ -22,31 +22,28 @@ const EmployeeDetabaseIndex = () => {
       console.log(e);
     }
   };
+
   const employeeItemHandler = useCallback(
     (e: any) => {
-      const { id, tagName } = e.target;
+      const { id } = e.target;
+      const [userId, type] = id.split("_");
+      if (userId && type === "user") {
+        const selectedEmployee = employeeList.find(
+          (emp) => emp.id === parseInt(userId, 10)
+        );
 
-      if (tagName === "SPAN" || tagName === "DIV") {
-        if (id) {
-          const selectedEmployee = employeeList.find(
-            (emp) => emp.id === parseInt(id, 10)
-          );
+        if (selectedEmployee) {
+          setEmployee(selectedEmployee);
 
-          if (selectedEmployee) {
-            setEmployee(selectedEmployee);
-
-            setActiveEmployee(selectedEmployee.id);
-          }
+          setActiveEmployee(selectedEmployee.id);
         }
-      } else if (tagName === "BUTTON") {
-        if (id) {
-          const filteredList = employeeList.filter(
-            (el, index) => el.id !== parseInt(id, 10)
-          );
+      } else if (userId && type === "delete") {
+        const filteredList = employeeList.filter(
+          (el) => el.id !== parseInt(userId, 10)
+        );
 
-          if (filteredList) {
-            setEmployeeList(filteredList);
-          }
+        if (filteredList) {
+          setEmployeeList(filteredList);
         }
       }
     },
