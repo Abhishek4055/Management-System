@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import EmployeeList from "./EmployeeList";
 import { EmployeeListModel } from "../../modal";
 import EmployeeDetails from "./EmployeeDetails";
 import EmployeeIForm from "./EmployeeIForm";
-import { fail } from "assert";
 
 const EmployeeDetabaseIndex = () => {
   const [employeeList, setEmployeeList] = useState<EmployeeListModel[]>([]);
@@ -25,8 +24,7 @@ const EmployeeDetabaseIndex = () => {
   };
   const employeeItemHandler = useCallback(
     (e: any) => {
-      const { id, tagName, innerText } = e.target;
-      console.log(e.target.innerText);
+      const { id, tagName } = e.target;
 
       if (tagName === "SPAN" || tagName === "DIV") {
         if (id) {

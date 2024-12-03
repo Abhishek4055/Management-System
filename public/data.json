@@ -141,38 +141,5 @@
     "dob": "16/02/1994",
     "salary": 0,
     "address": "Saharsa,Bihar"
-  },
-  {
-    "id": 1013,
-    "imageUrl": "https://scontent.fblr4-1.fna.fbcdn.net/v/t39.30808-6/445787972_3007240902750786_6519863029040551224_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=PvR6C6ylXUMQ7kNvgF9i1pP&_nc_zt=23&_nc_ht=scontent.fblr4-1.fna&_nc_gid=A2JIqxyD6cs18BvQttkBQFI&oh=00_AYCW1SSU6qRqOV3OnoGjrORVBszXe0vZddlHE5HLSD1xwg&oe=674E718D",
-    "fName": "Abhishek",
-    "lName": "Anand",
-    "age": 30,
-    "email": "abhishekanand.jnv@gmail.com",
-    "dob": "16/02/1994",
-    "salary": 0,
-    "address": "Saharsa,Bihar"
-  },
-  {
-    "id": 1014,
-    "imageUrl": "https://scontent.fblr4-1.fna.fbcdn.net/v/t39.30808-6/445787972_3007240902750786_6519863029040551224_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=PvR6C6ylXUMQ7kNvgF9i1pP&_nc_zt=23&_nc_ht=scontent.fblr4-1.fna&_nc_gid=A2JIqxyD6cs18BvQttkBQFI&oh=00_AYCW1SSU6qRqOV3OnoGjrORVBszXe0vZddlHE5HLSD1xwg&oe=674E718D",
-    "fName": "Abhishek",
-    "lName": "Anand",
-    "age": 30,
-    "email": "abhishekanand.jnv@gmail.com",
-    "dob": "16/02/1994",
-    "salary": 0,
-    "address": "Saharsa,Bihar"
-  },
-  {
-    "id": 1015,
-    "imageUrl": "https://scontent.fblr4-1.fna.fbcdn.net/v/t39.30808-6/445787972_3007240902750786_6519863029040551224_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=PvR6C6ylXUMQ7kNvgF9i1pP&_nc_zt=23&_nc_ht=scontent.fblr4-1.fna&_nc_gid=A2JIqxyD6cs18BvQttkBQFI&oh=00_AYCW1SSU6qRqOV3OnoGjrORVBszXe0vZddlHE5HLSD1xwg&oe=674E718D",
-    "fName": "Abhishek",
-    "lName": "Anand",
-    "age": 30,
-    "email": "abhishekanand.jnv@gmail.com",
-    "dob": "16/02/1994",
-    "salary": 0,
-    "address": "Saharsa,Bihar"
   }
 ]

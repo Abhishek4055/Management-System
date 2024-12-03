@@ -19,7 +19,7 @@ function EmployeeList(props: {
               activeEmployee === item.id ? "active" : ""
             }`}
             key={item.id}
-            id={item.id.toString() + "_" + "DIV"}
+            id={item.id.toString()}
           >
             <span
               className="employee__list--item--text "

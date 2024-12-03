@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { OverlayModule } from "../modal";
 
 const OverlayPage: React.FC<OverlayModule> = (props) => {
-  const { titel = "Header", isVisible, onClose, children, isDisabled } = props;
+  const { titel = "Header", isVisible, onClose, children } = props;
 
   useEffect(() => {
     if (isVisible) {
