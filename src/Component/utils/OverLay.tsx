@@ -54,6 +54,8 @@ const OverLayHeader = styled.div`
   left: 0px;
   box-sizing: border-box;
   padding: 0 35px;
+  height: 57px;
+  background-color: black;
 
   @media (max-width: 480px) {
     margin: 0 10px 10px 10px;
