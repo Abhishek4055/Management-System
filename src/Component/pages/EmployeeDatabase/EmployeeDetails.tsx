@@ -48,8 +48,6 @@ const DetailsContainer = styled.div`
   border: none;
   text-align: center;
   box-shadow: inset 0 0 10px #565f71;
-  display: flex;
-  flex-wrap: wrap;
 
   @media (max-width: 480px) {
     width: 100%;
