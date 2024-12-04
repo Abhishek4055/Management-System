@@ -89,7 +89,7 @@ export default function EmployeeIForm({
       titel="Add Employee Details"
       isDisabled={false}
     >
-      <FormContainer onSubmit={submitHandler}>
+      <FormContainer onSubmit={submitHandler} className="body">
         <span>
           <label htmlFor="fName">First Name</label>
           <InputField
@@ -232,6 +232,23 @@ const FormContainer = styled.form`
     padding: 0;
   }
 
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #565f71;
+    border-radius: 10px;
+    margin-left: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #31353c;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 10px #565f71;
+  }
+
   span {
     display: flex;
     justify-content: center;
@@ -247,6 +264,10 @@ const FormContainer = styled.form`
       width: 90%;
       color: #67dfb7;
       text-align: left;
+      @media (max-width: 480px) {
+        margin-top: 5px;
+        font-size: small;
+      }
     }
     .inputField {
       width: 90%;

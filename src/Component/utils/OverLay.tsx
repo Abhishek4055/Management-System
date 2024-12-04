@@ -46,20 +46,19 @@ const OverLayHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
   justify-content: space-between;
-  margin-bottom: 25px;
-  /* span {
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
-    background: none;
-    border: none;
-  } */
+  position: absolute;
+  z-index: 1100;
+  top: 0px;
+  left: 0px;
+  box-sizing: border-box;
+  padding: 0 35px;
+
   @media (max-width: 480px) {
     margin: 0 10px 10px 10px;
-    span {
-      font-size: x-small;
-    }
+    font-size: small;
+    padding: 0px 10px;
   }
 `;
 
@@ -93,20 +92,27 @@ const Backdrop = styled.div`
 
 const OverlayContent = styled.div`
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding: 20px;
   overflow-y: auto;
-  box-sizing: border-box;
-  position: relative;
+
+  .body {
+    position: relative;
+    top: 60px;
+  }
   .footer {
-    position: absolute;
+    position: fixed;
     z-index: 1100;
     bottom: 20px;
-    width: 90%;
+    width: 45%;
     display: flex;
     box-sizing: border-box;
     justify-content: space-between;
+    @media (max-width: 480px) {
+      width: 70%;
+    }
   }
   @media (max-width: 480px) {
     padding: 15px;
@@ -124,9 +130,9 @@ const CloseIconButton = styled.button`
   padding: auto;
   transition: 0.8s all;
   &:hover {
-    transform: rotate(360deg) scale(1.5);
+    transform: rotate(360deg) scale(1.3);
   }
   @media (max-width: 480px) {
-    font-size: xx-small;
+    font-size: large;
   }
 `;

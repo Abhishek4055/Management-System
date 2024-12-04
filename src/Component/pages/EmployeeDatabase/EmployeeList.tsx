@@ -71,7 +71,7 @@ const List = styled.div`
   height: 80vh;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 15px; /* Scrollbar width */
+    width: 10px; /* Scrollbar width */
   }
   &::-webkit-scrollbar-track {
     background: #565f71; /* Track background */
@@ -84,6 +84,14 @@ const List = styled.div`
   }
   &::-webkit-scrollbar-thumb:hover {
     box-shadow: inset 0 0 10px #565f71; /* Thumb color on hover */
+  }
+
+  @media (max-width: 480px) {
+    height: 30vh;
+    &::-webkit-scrollbar {
+      width: 5px; /* Scrollbar width */
+    }
+    /* overflow-y: auto; */
   }
 
   .employee__list_item {
