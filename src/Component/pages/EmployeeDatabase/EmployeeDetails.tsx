@@ -48,12 +48,19 @@ const DetailsContainer = styled.div`
   border: none;
   text-align: center;
   box-shadow: inset 0 0 10px #565f71;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    min-height: auto;
+    max-height: auto;
+    justify-content: center;
+  }
 
   .employee__details--header {
     text-align: center;
   }
-  /* .employee__details--body {
-  } */
 `;
 
 const DetailContent = styled.div`
@@ -65,11 +72,17 @@ const DetailContent = styled.div`
   padding: 20px;
   max-height: 70vh;
   overflow-y: auto;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    min-height: auto;
+    max-height: auto;
+  }
   &::-webkit-scrollbar {
-    width: 15px; /* Width of the scrollbar */
+    width: 15px;
   }
   &::-webkit-scrollbar-track {
-    background: #565f71; //Scrollbar track color */
+    background: #565f71;
     border-radius: 10px;
   }
   img {

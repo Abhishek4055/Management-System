@@ -207,7 +207,7 @@ export default function EmployeeIForm({
             required
           />
         </span>
-        <OverLayFooter>
+        <OverLayFooter className="footer">
           <Button buttonType="reset" type="reset" onClick={resetHandeler}>
             Reset
           </Button>
@@ -228,6 +228,9 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 480px) {
+    padding: 0;
+  }
 
   span {
     display: flex;
@@ -257,6 +260,10 @@ const FormContainer = styled.form`
       &:focus {
         outline: none;
       }
+    }
+    @media (max-width: 480px) {
+      margin: 5px;
+      width: 100%;
     }
   }
 `;

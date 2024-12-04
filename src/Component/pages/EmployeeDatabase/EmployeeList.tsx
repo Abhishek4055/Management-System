@@ -55,6 +55,13 @@ const ListContainer = styled.div`
   box-shadow: inset 0 0 10px #565f71;
   /* position: relative; */
 
+  @media (max-width: 480px) {
+    width: 100%;
+    min-height: auto;
+    max-height: auto;
+    flex-wrap: wr;
+  }
+
   .employee__list--header {
     text-align: center;
   }

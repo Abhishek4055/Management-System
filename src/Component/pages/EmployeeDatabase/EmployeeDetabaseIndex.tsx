@@ -70,9 +70,7 @@ const EmployeeDetabaseIndex = () => {
   return (
     <>
       <Header>
-        <span className="header">
-          <h2> Employee Database Management </h2>
-        </span>
+        <h2> Employee Database Management </h2>
         <StypledButton onClick={openOverlay}> Add New Employee </StypledButton>
       </Header>
 
@@ -103,6 +101,11 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  @media (max-width: 480px) {
+    font-size: xx-small;
+    margin: 0 20px;
+    text-align: left;
+  }
 `;
 
 const StypledButton = styled.button`
@@ -126,6 +129,11 @@ const StypledButton = styled.button`
     box-shadow: inset 0 0 5px #3ea1bb;
     color: #f0f8ff;
   }
+  @media (max-width: 480px) {
+    font-size: x-small;
+    padding: 5px;
+    border-radius: 5px;
+  }
 `;
 
 const Container = styled.div`
@@ -135,4 +143,7 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: row;
   gap: 10px;
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+  }
 `;

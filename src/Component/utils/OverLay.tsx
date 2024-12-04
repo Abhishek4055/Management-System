@@ -26,7 +26,7 @@ const OverlayPage: React.FC<OverlayModule> = (props) => {
       <OverlayContainer isVisible={isVisible}>
         <OverlayContent>
           <OverLayHeader>
-            <span>{titel}</span>
+            <h3>{titel}</h3>
             <CloseIconButton onClick={onClose}>❌</CloseIconButton>
           </OverLayHeader>
           {children}
@@ -48,12 +48,18 @@ const OverLayHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
-  span {
+  /* span {
     font-size: 24px;
     color: white;
     font-weight: bold;
     background: none;
     border: none;
+  } */
+  @media (max-width: 480px) {
+    margin: 0 10px 10px 10px;
+    span {
+      font-size: x-small;
+    }
   }
 `;
 
@@ -69,6 +75,9 @@ const OverlayContainer = styled.div<OverlayContainerProps>`
   box-shadow: inset 0 0 10px #565f71;
   z-index: 1100;
   transition: right 0.8s ease-in-out;
+  @media (max-width: 480px) {
+    width: 80%;
+  }
 `;
 
 const Backdrop = styled.div`
@@ -89,6 +98,21 @@ const OverlayContent = styled.div`
   padding: 20px;
   overflow-y: auto;
   box-sizing: border-box;
+  position: relative;
+  .footer {
+    position: absolute;
+    z-index: 1100;
+    bottom: 20px;
+    width: 90%;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+  @media (max-width: 480px) {
+    padding: 15px;
+    text-align: left;
+    font-size: xx-small;
+  }
 `;
 
 const CloseIconButton = styled.button`
@@ -101,5 +125,8 @@ const CloseIconButton = styled.button`
   transition: 0.8s all;
   &:hover {
     transform: rotate(360deg) scale(1.5);
+  }
+  @media (max-width: 480px) {
+    font-size: xx-small;
   }
 `;
