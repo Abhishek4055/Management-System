@@ -24,14 +24,14 @@ const EmployeeDetabaseIndex = () => {
     }
   };
 
-  const openOverlay = useCallback(() => {
+  const openOverlay = () => {
     setIsOverlayVisible(true);
-  }, [isOverlayVisible]);
+  };
 
-  const closeOverlay = useCallback(() => {
+  const closeOverlay = () => {
     setIsOverlayVisible(false);
     setIsEdit(false);
-  }, [isOverlayVisible, isEdit]);
+  };
 
   const employeeItemHandler = useCallback(
     (e: any) => {
