@@ -4,15 +4,16 @@ import styled from "styled-components";
 // import { AiFillDelete } from "react-icons/ai";
 
 function EmployeeList(props: {
+  // employee: EmployeeListModel;
   activeEmployee: number | undefined;
   employeeList: EmployeeListModel[];
   employeeItemHandler: any;
 }) {
   const { employeeList, employeeItemHandler, activeEmployee } = props;
   return (
-    <ListContainer>
+    <ListContainer employeeList={employeeList}>
       <h2 className="employee__list--header">Employee List</h2>
-      <List onClick={employeeItemHandler} id="id">
+      <List onClick={employeeItemHandler} id="id" employeeList={employeeList}>
         {employeeList?.map((item) => (
           <div
             className={`employee__list_item ${
@@ -43,10 +44,13 @@ function EmployeeList(props: {
 
 export default React.memo(EmployeeList);
 
-const ListContainer = styled.div`
+interface ListStyledContainer {
+  employeeList: EmployeeListModel[] | [];
+}
+const ListContainer = styled.div<ListStyledContainer>`
   width: 40%;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
+  /* max-height: 100vh; */
   box-sizing: border-box;
   border-radius: 10px;
   padding: 0 10px;
@@ -66,9 +70,10 @@ const ListContainer = styled.div`
     text-align: center;
   }
 `;
-const List = styled.div`
+
+const List = styled.div<ListStyledContainer>`
   width: 100%;
-  height: 80vh;
+  height: ${({ employeeList }) => (employeeList.length ? "73vh" : "auto")};
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px; /* Scrollbar width */
@@ -91,7 +96,6 @@ const List = styled.div`
     &::-webkit-scrollbar {
       width: 5px; /* Scrollbar width */
     }
-    /* overflow-y: auto; */
   }
 
   .employee__list_item {
