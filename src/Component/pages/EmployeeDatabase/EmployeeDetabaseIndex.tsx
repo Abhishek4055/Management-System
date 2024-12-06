@@ -55,7 +55,7 @@ const EmployeeDetabaseIndex = () => {
         }
       }
     },
-    [employeeList, activeEmployee, employee]
+    [employeeList]
   );
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const EmployeeDetabaseIndex = () => {
   const submitInputData = useCallback(
     (formData: EmployeeListModel) => {
       if (isEdit) {
-        const updateItem = employeeList.map((element) =>
+        const updateItem = employeeList.map((element: any) =>
           element?.id === formData.id ? formData : element
         );
 
@@ -128,7 +128,7 @@ const EmployeeDetabaseIndex = () => {
   );
 };
 
-export default React.memo(EmployeeDetabaseIndex);
+export default EmployeeDetabaseIndex;
 
 const Header = styled.header`
   margin: 0 20px;
