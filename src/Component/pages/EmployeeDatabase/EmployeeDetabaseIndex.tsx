@@ -76,7 +76,7 @@ const EmployeeDetabaseIndex = () => {
         setIsEdit(true);
       }
     },
-    [isEdit, isOverlayVisible]
+    [isOverlayVisible]
   );
 
   // submit add/edit form input data
