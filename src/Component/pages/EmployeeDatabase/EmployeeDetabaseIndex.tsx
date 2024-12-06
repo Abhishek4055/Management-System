@@ -21,7 +21,7 @@ const EmployeeDetabaseIndex = () => {
   const closeOverlay = useCallback(() => {
     setIsOverlayVisible(false);
     setIsEdit(false);
-  }, [isOverlayVisible]);
+  }, [isOverlayVisible, isEdit]);
 
   const getEmployeeList = async () => {
     try {
