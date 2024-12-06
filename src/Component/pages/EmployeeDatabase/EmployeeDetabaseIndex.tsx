@@ -14,15 +14,6 @@ const EmployeeDetabaseIndex = () => {
   const [selectedEditedData, setSelectedEditedData] =
     useState<EmployeeListModel | null>(null);
 
-  const openOverlay = useCallback(() => {
-    setIsOverlayVisible(true);
-  }, [isOverlayVisible]);
-
-  const closeOverlay = useCallback(() => {
-    setIsOverlayVisible(false);
-    setIsEdit(false);
-  }, [isOverlayVisible, isEdit]);
-
   const getEmployeeList = async () => {
     try {
       const response = await fetch("../../../.././data.json");
@@ -32,6 +23,15 @@ const EmployeeDetabaseIndex = () => {
       console.log(e);
     }
   };
+
+  const openOverlay = useCallback(() => {
+    setIsOverlayVisible(true);
+  }, [isOverlayVisible]);
+
+  const closeOverlay = useCallback(() => {
+    setIsOverlayVisible(false);
+    setIsEdit(false);
+  }, [isOverlayVisible, isEdit]);
 
   const employeeItemHandler = useCallback(
     (e: any) => {
@@ -55,7 +55,7 @@ const EmployeeDetabaseIndex = () => {
         }
       }
     },
-    [employeeList]
+    [employeeList, activeEmployee, employee]
   );
 
   useEffect(() => {
@@ -94,10 +94,10 @@ const EmployeeDetabaseIndex = () => {
       }
       if (formData) return true;
     },
-    [isEdit]
+    [isEdit, employeeList]
   );
 
-  // console.log("isEdit", isEdit, employeeList);
+  console.log("isEdit", isEdit, employeeList);
   return (
     <>
       <Header>
