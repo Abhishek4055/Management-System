@@ -4,7 +4,7 @@ import styled from "styled-components";
 // import { AiFillDelete } from "react-icons/ai";
 
 function EmployeeList(props: {
-  activeEmployee: number;
+  activeEmployee: number | undefined;
   employeeList: EmployeeListModel[];
   employeeItemHandler: any;
 }) {
@@ -19,17 +19,17 @@ function EmployeeList(props: {
               activeEmployee === item.id ? "active" : ""
             }`}
             key={item.id}
-            id={`${item.id.toString()}_user`}
+            id={`${item.id?.toString()}_addUser`}
           >
             <span
               className="employee__list--item--text "
-              id={`${item.id.toString()}_user`}
+              id={`${item.id?.toString()}_addUser`}
             >
               {item.fName + " " + item.lName}
             </span>
             <IconButton
-              className="employee__list--item--icon "
-              id={`${item.id.toString()}_delete`}
+              className="employee__list--item--icon"
+              id={`${item.id?.toString()}_delete`}
             >
               ❌
               {/* <AiFillDelete id={item.id.toString() + "_" + "delete"} /> */}
@@ -109,6 +109,11 @@ const List = styled.div`
     color: "#f0f8ff";
     transition: 0.4s all;
 
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
     &.active {
       color: #00ffbb;
       box-shadow: inset 0 0 10px #4ed697;
@@ -128,5 +133,6 @@ const IconButton = styled.span`
   &:hover {
     transform: scale(1.5);
     color: #ff0000 !important;
+    cursor: pointer;
   }
 `;

@@ -1,17 +1,21 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import OverlayPage from "../../utils/OverLay";
 import InputField from "../../utils/InputFields";
 import { EmployeeListModel } from "../../modal";
 import styled from "styled-components";
 
-export default function EmployeeIForm({
+function EmployeeIForm({
   isOverlayVisible,
   closeOverlay,
-  addInputData,
+  submitInputData,
+  selectedEditedData,
+  isEdit,
 }: {
   isOverlayVisible: boolean;
   closeOverlay: () => void;
-  addInputData: (formData: EmployeeListModel) => boolean | undefined;
+  submitInputData: (formData: EmployeeListModel) => boolean | undefined;
+  selectedEditedData: EmployeeListModel | null;
+  isEdit: boolean;
 }) {
   const [inputState, setinputState] = useState<EmployeeListModel>({
     id: new Date().getTime(),
@@ -41,11 +45,20 @@ export default function EmployeeIForm({
     });
   };
 
+  // update edit-data in input form
+  useEffect(() => {
+    if (selectedEditedData) {
+      setinputState(selectedEditedData);
+    }
+  }, [selectedEditedData]);
+
+  //for edit function
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    const isSubmited = addInputData({
+    const isSubmited = submitInputData({
       ...inputState,
+      id: inputState.id,
       imageUrl:
         inputState.imageUrl === ""
           ? "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
@@ -86,7 +99,7 @@ export default function EmployeeIForm({
     <OverlayPage
       isVisible={isOverlayVisible}
       onClose={closeOverlay}
-      titel="Add Employee Details"
+      titel={`${isEdit ? "Edit" : "Add"} Employee Details`}
       isDisabled={false}
     >
       <FormContainer onSubmit={submitHandler} className="body">
@@ -212,13 +225,15 @@ export default function EmployeeIForm({
             Reset
           </Button>
           <Button buttonType="submit" type="submit">
-            Submit
+            {`${isEdit ? " Update" : "Submit"}`}
           </Button>
         </OverLayFooter>
       </FormContainer>
     </OverlayPage>
   );
 }
+
+export default React.memo(EmployeeIForm);
 
 const FormContainer = styled.form`
   box-sizing: border-box;

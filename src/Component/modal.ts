@@ -6,15 +6,15 @@ export interface ToDoeModel {
   isDone: boolean;
 }
 export interface EmployeeListModel {
-  id: number;
-  imageUrl: string;
-  fName: string;
-  lName: string;
-  age: string;
-  email: string;
-  dob: string;
+  id: number | undefined;
+  imageUrl: string | undefined;
+  fName: string | undefined;
+  lName: string | undefined;
+  age: string | undefined;
+  email: string | undefined;
+  dob: string | undefined;
   salary: any;
-  address: string;
+  address: string | undefined;
 }
 
 export interface OverlayModule {

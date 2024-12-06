@@ -36,7 +36,7 @@ const OverlayPage: React.FC<OverlayModule> = (props) => {
   );
 };
 
-export default OverlayPage;
+export default React.memo(OverlayPage);
 
 interface OverlayContainerProps {
   isVisible: boolean;

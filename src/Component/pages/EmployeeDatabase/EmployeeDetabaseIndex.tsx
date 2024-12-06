@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import EmployeeList from "./EmployeeList";
 import { EmployeeListModel } from "../../modal";
@@ -8,10 +8,20 @@ import EmployeeIForm from "./EmployeeIForm";
 const EmployeeDetabaseIndex = () => {
   const [employeeList, setEmployeeList] = useState<EmployeeListModel[]>([]);
   const [employee, setEmployee] = useState<EmployeeListModel | null>(null);
-  const [activeEmployee, setActiveEmployee] = useState<number>(0);
+  const [activeEmployee, setActiveEmployee] = useState<number | undefined>(0);
   const [isOverlayVisible, setIsOverlayVisible] = useState<boolean>(false);
-  const openOverlay = () => setIsOverlayVisible(true);
-  const closeOverlay = () => setIsOverlayVisible(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [selectedEditedData, setSelectedEditedData] =
+    useState<EmployeeListModel | null>(null);
+
+  const openOverlay = useCallback(() => {
+    setIsOverlayVisible(true);
+  }, [isOverlayVisible]);
+
+  const closeOverlay = useCallback(() => {
+    setIsOverlayVisible(false);
+    setIsEdit(false);
+  }, [isOverlayVisible]);
 
   const getEmployeeList = async () => {
     try {
@@ -27,14 +37,12 @@ const EmployeeDetabaseIndex = () => {
     (e: any) => {
       const { id } = e.target;
       const [userId, type] = id.split("_");
-      if (userId && type === "user") {
+      if (userId && type === "addUser") {
         const selectedEmployee = employeeList.find(
           (emp) => emp.id === parseInt(userId, 10)
         );
-
         if (selectedEmployee) {
           setEmployee(selectedEmployee);
-
           setActiveEmployee(selectedEmployee.id);
         }
       } else if (userId && type === "delete") {
@@ -59,14 +67,37 @@ const EmployeeDetabaseIndex = () => {
     setActiveEmployee(employeeList[0]?.id);
   }, [employeeList]);
 
-  const addInputData = useCallback(
-    (formData: EmployeeListModel) => {
-      setEmployeeList([formData, ...employeeList]);
-      if (formData) return true;
+  // update edit form input
+  const detailsEditHandler = useCallback(
+    (item: EmployeeListModel | null) => {
+      if (item) {
+        setSelectedEditedData({ ...item });
+        setIsOverlayVisible(!isOverlayVisible);
+        setIsEdit(true);
+      }
     },
-    [employeeList]
+    [isEdit]
   );
 
+  // submit add/edit form input data
+  const submitInputData = useCallback(
+    (formData: EmployeeListModel) => {
+      if (isEdit) {
+        const updateItem = employeeList.map((element) =>
+          element?.id === formData.id ? formData : element
+        );
+
+        setEmployeeList(updateItem);
+        setIsEdit(false);
+      } else {
+        setEmployeeList([formData, ...employeeList]);
+      }
+      if (formData) return true;
+    },
+    [isEdit]
+  );
+
+  // console.log("isEdit", isEdit, employeeList);
   return (
     <>
       <Header>
@@ -77,7 +108,9 @@ const EmployeeDetabaseIndex = () => {
       <EmployeeIForm
         isOverlayVisible={isOverlayVisible}
         closeOverlay={closeOverlay}
-        addInputData={addInputData}
+        submitInputData={submitInputData}
+        selectedEditedData={selectedEditedData}
+        isEdit={isEdit}
       />
 
       <Container>
@@ -86,13 +119,16 @@ const EmployeeDetabaseIndex = () => {
           employeeList={employeeList}
           employeeItemHandler={employeeItemHandler}
         />
-        <EmployeeDetails employee={employee} />
+        <EmployeeDetails
+          employee={employee}
+          detailsEditHandler={detailsEditHandler}
+        />
       </Container>
     </>
   );
 };
 
-export default EmployeeDetabaseIndex;
+export default React.memo(EmployeeDetabaseIndex);
 
 const Header = styled.header`
   margin: 0 20px;

@@ -2,12 +2,18 @@ import React from "react";
 import { EmployeeListModel } from "../../modal";
 import styled from "styled-components";
 
-function EmployeeDetails(props: { employee: EmployeeListModel | null }) {
-  const { employee } = props;
+function EmployeeDetails(props: {
+  employee: EmployeeListModel | null;
+  detailsEditHandler: (employee: EmployeeListModel | null) => void;
+}) {
+  const { employee, detailsEditHandler } = props;
 
   return (
     <DetailsContainer className="employee__details">
-      <h2 className="employee__details--header">Employee Details</h2>
+      <DetailsHeader>
+        <h2 className="employee__details--header">Employee Details</h2>
+        <EditIcon onClick={() => detailsEditHandler(employee)}>📝</EditIcon>
+      </DetailsHeader>
       {employee && (
         <DetailContent>
           <img
@@ -44,7 +50,7 @@ const DetailsContainer = styled.div`
   max-height: 100vh;
   box-sizing: border-box;
   border-radius: 10px;
-  padding: 0 10px;
+  padding: 0 20px;
   border: none;
   text-align: center;
   box-shadow: inset 0 0 10px #565f71;
@@ -58,6 +64,31 @@ const DetailsContainer = styled.div`
 
   .employee__details--header {
     text-align: center;
+  }
+`;
+const DetailsHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @media (max-width: 480px) {
+  }
+`;
+const EditIcon = styled.span`
+  padding: 5px;
+  font-size: larger;
+  position: absolute;
+  right: 4%;
+  top: 18px;
+  transition: 0.4s all;
+
+  &:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
+
+  @media (max-width: 480px) {
   }
 `;
 
