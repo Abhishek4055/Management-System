@@ -14,14 +14,14 @@ const EmployeeDetabaseIndex = () => {
   const [selectedEditedData, setSelectedEditedData] =
     useState<EmployeeListModel | null>(null);
 
-  const openOverlay = useCallback(() => {
+  const openOverlay = () => {
     setIsOverlayVisible(true);
-  }, [isOverlayVisible]);
+  };
 
-  const closeOverlay = useCallback(() => {
+  const closeOverlay = () => {
     setIsOverlayVisible(false);
     setIsEdit(false);
-  }, [isOverlayVisible]);
+  };
 
   const getEmployeeList = async () => {
     try {
@@ -49,10 +49,7 @@ const EmployeeDetabaseIndex = () => {
         const filteredList = employeeList.filter(
           (el) => el.id !== parseInt(userId, 10)
         );
-
-        if (filteredList) {
-          setEmployeeList(filteredList);
-        }
+        setEmployeeList(filteredList);
       }
     },
     [employeeList]
@@ -63,9 +60,25 @@ const EmployeeDetabaseIndex = () => {
   }, []);
 
   useEffect(() => {
-    setEmployee(employeeList[0]);
-    setActiveEmployee(employeeList[0]?.id);
-  }, [employeeList]);
+    let setOfId = new Set();
+    for (let el of employeeList) {
+      setOfId.add(el.id);
+    }
+
+    if (employee && setOfId.has(employee.id)) {
+      // is selected employee available in the list or not
+      if (employee.id === employeeList[0]?.id) {
+        setEmployee(employeeList[0]);
+        setActiveEmployee(employeeList[0]?.id);
+      } else {
+        setEmployee(employee);
+        setActiveEmployee(employee.id);
+      }
+    } else {
+      setEmployee(employeeList[0]);
+      setActiveEmployee(employeeList[0]?.id);
+    }
+  }, [employeeList, setActiveEmployee]);
 
   // update edit form input
   const detailsEditHandler = useCallback(
@@ -82,19 +95,21 @@ const EmployeeDetabaseIndex = () => {
   // submit add/edit form input data
   const submitInputData = useCallback(
     (formData: EmployeeListModel) => {
-      if (isEdit) {
+      if (isEdit && formData) {
         const updateItem = employeeList.map((element) =>
           element?.id === formData.id ? formData : element
         );
-
+        setEmployee(formData);
+        setActiveEmployee(formData.id);
         setEmployeeList(updateItem);
         setIsEdit(false);
       } else {
         setEmployeeList([formData, ...employeeList]);
+        setEmployee(null);
       }
       if (formData) return true;
     },
-    [isEdit]
+    [isEdit, setEmployee, setActiveEmployee]
   );
 
   // console.log("isEdit", isEdit, employeeList);
@@ -105,16 +120,9 @@ const EmployeeDetabaseIndex = () => {
         <StypledButton onClick={openOverlay}> Add New Employee </StypledButton>
       </Header>
 
-      <EmployeeIForm
-        isOverlayVisible={isOverlayVisible}
-        closeOverlay={closeOverlay}
-        submitInputData={submitInputData}
-        selectedEditedData={selectedEditedData}
-        isEdit={isEdit}
-      />
-
       <Container>
         <EmployeeList
+          // employee={employee}
           activeEmployee={activeEmployee}
           employeeList={employeeList}
           employeeItemHandler={employeeItemHandler}
@@ -124,6 +132,14 @@ const EmployeeDetabaseIndex = () => {
           detailsEditHandler={detailsEditHandler}
         />
       </Container>
+
+      <EmployeeIForm
+        isOverlayVisible={isOverlayVisible}
+        closeOverlay={closeOverlay}
+        submitInputData={submitInputData}
+        selectedEditedData={selectedEditedData}
+        isEdit={isEdit}
+      />
     </>
   );
 };
@@ -131,7 +147,7 @@ const EmployeeDetabaseIndex = () => {
 export default React.memo(EmployeeDetabaseIndex);
 
 const Header = styled.header`
-  margin: 0 20px;
+  margin: 0 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -173,12 +189,14 @@ const StypledButton = styled.button`
 `;
 
 const Container = styled.div`
-  padding: 0px 20px 20px 20px;
+  padding: 0px 50px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: row;
-  gap: 10px;
+  gap: 25px;
+  box-sizing: border-box;
+  height: 90vh;
   @media (max-width: 480px) {
     flex-wrap: wrap;
   }

@@ -34,6 +34,13 @@ const route = createBrowserRouter([
     children: [
       { index: true, element: <EmployeeDetabaseIndex /> },
       {
+        path: "home",
+        element: <Home />,
+        errorElement: (
+          <ErrorPage message="Found something wrong on the order page...404" />
+        ),
+      },
+      {
         path: "order_summary",
         element: <OrderSummery />,
         errorElement: (
@@ -66,7 +73,6 @@ const route = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
-  console.log("lkdfkljlskdf");
   return <RouterProvider router={route} />;
 };
 

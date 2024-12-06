@@ -9,17 +9,21 @@ function EmployeeDetails(props: {
   const { employee, detailsEditHandler } = props;
 
   return (
-    <DetailsContainer className="employee__details">
+    <DetailsContainer className="employee__details" employee={employee}>
       <DetailsHeader>
         <h2 className="employee__details--header">Employee Details</h2>
-        <EditIcon onClick={() => detailsEditHandler(employee)}>📝</EditIcon>
+        {employee?.id && (
+          <EditIcon onClick={() => detailsEditHandler(employee)}>📝</EditIcon>
+        )}
       </DetailsHeader>
-      {employee && (
+      {employee?.id && (
         <DetailContent>
           <img
             className="employee__details--image"
             src={employee.imageUrl}
-            alt="A A"
+            alt={`${employee.fName?.charAt(0).toUpperCase()} ${employee.lName
+              ?.charAt(0)
+              .toUpperCase()}`}
           />
           <span className="employee__details--comp">
             {employee.fName} {employee.lName} ({employee.age})
@@ -44,10 +48,13 @@ function EmployeeDetails(props: {
 
 export default React.memo(EmployeeDetails);
 
-const DetailsContainer = styled.div`
+interface DetailsStyledContainer {
+  employee: EmployeeListModel | null;
+}
+const DetailsContainer = styled.div<DetailsStyledContainer>`
   width: 70%;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: ${({ employee }) => (employee?.id ? "90vh" : "auto")};
+  /* overflow-y: auto; */
   box-sizing: border-box;
   border-radius: 10px;
   padding: 0 20px;
