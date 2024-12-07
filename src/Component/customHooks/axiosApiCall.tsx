@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface AxiosModule {
   url: string;
@@ -11,7 +11,7 @@ const useAxios = ({ url, config = {} }: AxiosModule) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -26,13 +26,13 @@ const useAxios = ({ url, config = {} }: AxiosModule) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [url]);
 
   useEffect(() => {
     if (url) {
       getData();
     }
-  }, [url]);
+  }, [url, getData]);
 
   return { data, isLoading, error };
 };
