@@ -1,12 +1,19 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import HeaderComp from "./Component/navPages/header";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Home from "./Component/navPages/Home";
-import About from "./Component/navPages/About";
-import OrderSummery from "./Component/pages/OrderSummery";
 import "./App.scss";
-import ToDoes from "./Component/pages/todo/ToDoes";
-import EmployeeDetabaseIndex from "./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex";
+import LoadingPage from "./Component/utils/LoadingPage";
+
+// Lazy-loaded components
+const Home = lazy(() => import("./Component/navPages/Home"));
+const About = lazy(() => import("./Component/navPages/About"));
+const OrderSummery = lazy(() => import("./Component/pages/OrderSummery"));
+const ToDoes = lazy(() => import("./Component/pages/todo/ToDoes"));
+const EmployeeDetabaseIndex = lazy(
+  () => import("./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex")
+);
+
+const ERROR_MESSAGE = "Found something wrong ...404";
 
 // Error component
 const ErrorPage: React.FC<{ message: string }> = ({ message }) => (
@@ -28,45 +35,60 @@ const route = createBrowserRouter([
         </div>
       </div>
     ),
-    errorElement: (
-      <ErrorPage message="Found something wrong in the main page...404" />
-    ),
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
     children: [
-      { index: true, element: <EmployeeDetabaseIndex /> },
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <EmployeeDetabaseIndex />
+          </Suspense>
+        ),
+      },
       {
         path: "home",
-        element: <Home />,
-        errorElement: (
-          <ErrorPage message="Found something wrong on the order page...404" />
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <Home />
+          </Suspense>
         ),
+        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
       },
       {
         path: "order_summary",
-        element: <OrderSummery />,
-        errorElement: (
-          <ErrorPage message="Found something wrong on the order page...404" />
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <OrderSummery />
+          </Suspense>
         ),
+        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
       },
       {
         path: "toDoes",
-        element: <ToDoes />,
-        errorElement: (
-          <ErrorPage message="Found something wrong on the To-Does page...404" />
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <ToDoes />
+          </Suspense>
         ),
+        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
       },
       {
         path: "employeeDatabese",
-        element: <EmployeeDetabaseIndex />,
-        errorElement: (
-          <ErrorPage message="Found something wrong on the Employee Database page...404" />
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <EmployeeDetabaseIndex />
+          </Suspense>
         ),
+        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
       },
       {
         path: "about",
-        element: <About />,
-        errorElement: (
-          <ErrorPage message="Found something wrong on the About page...404" />
+        element: (
+          <Suspense fallback={<LoadingPage message="Loading" />}>
+            <About />
+          </Suspense>
         ),
+        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
       },
     ],
   },
