@@ -53,7 +53,8 @@ interface DetailsStyledContainer {
 }
 const DetailsContainer = styled.div<DetailsStyledContainer>`
   width: 70%;
-  height: ${({ employee }) => (employee?.id ? "90vh" : "auto")};
+  min-height: ${({ employee }) => (employee?.id ? "90vh" : "auto")};
+  max-height: ${({ employee }) => (employee?.id ? "90vh" : "auto")};
   /* overflow-y: auto; */
   box-sizing: border-box;
   border-radius: 10px;
@@ -65,12 +66,15 @@ const DetailsContainer = styled.div<DetailsStyledContainer>`
   @media (max-width: 480px) {
     width: 100%;
     min-height: auto;
-    max-height: auto;
-    justify-content: center;
+    max-height: max-content;
+    padding: 0 15px;
   }
 
   .employee__details--header {
     text-align: center;
+    @media (max-width: 480px) {
+      justify-content: flex-start;
+    }
   }
 `;
 const DetailsHeader = styled.header`
@@ -80,6 +84,7 @@ const DetailsHeader = styled.header`
   position: relative;
 
   @media (max-width: 480px) {
+    justify-content: flex-start;
   }
 `;
 const EditIcon = styled.span`
@@ -96,6 +101,9 @@ const EditIcon = styled.span`
   }
 
   @media (max-width: 480px) {
+    right: 0;
+    padding: 0;
+    top: auto;
   }
 `;
 
@@ -110,9 +118,9 @@ const DetailContent = styled.div`
   overflow-y: auto;
 
   @media (max-width: 480px) {
-    width: 100%;
+    width: auto;
     min-height: auto;
-    max-height: auto;
+    max-height: max-content;
   }
   &::-webkit-scrollbar {
     width: 15px;

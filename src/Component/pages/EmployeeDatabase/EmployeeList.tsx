@@ -49,7 +49,8 @@ interface ListStyledContainer {
 }
 const ListContainer = styled.div<ListStyledContainer>`
   width: 40%;
-  height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
+  min-height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
+  max-height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
   /* max-height: 100vh; */
   box-sizing: border-box;
   border-radius: 10px;
@@ -62,8 +63,8 @@ const ListContainer = styled.div<ListStyledContainer>`
   @media (max-width: 480px) {
     width: 100%;
     min-height: auto;
-    max-height: auto;
-    flex-wrap: wr;
+    max-height: max-content;
+    flex-wrap: wrap;
   }
 
   .employee__list--header {
@@ -73,7 +74,8 @@ const ListContainer = styled.div<ListStyledContainer>`
 
 const List = styled.div<ListStyledContainer>`
   width: 100%;
-  height: ${({ employeeList }) => (employeeList.length ? "73vh" : "auto")};
+  min-height: ${({ employeeList }) => (employeeList.length ? "73vh" : "auto")};
+  max-height: ${({ employeeList }) => (employeeList.length ? "73vh" : "auto")};
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px; /* Scrollbar width */
@@ -92,7 +94,11 @@ const List = styled.div<ListStyledContainer>`
   }
 
   @media (max-width: 480px) {
-    height: 30vh;
+    min-height: ${({ employeeList }) =>
+      employeeList.length ? "40vh" : "auto"};
+    max-height: ${({ employeeList }) =>
+      employeeList.length ? "40vh" : "auto"};
+    margin-bottom: 5px;
     &::-webkit-scrollbar {
       width: 5px; /* Scrollbar width */
     }

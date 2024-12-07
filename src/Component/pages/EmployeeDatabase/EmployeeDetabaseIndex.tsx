@@ -199,5 +199,8 @@ const Container = styled.div`
   height: 90vh;
   @media (max-width: 480px) {
     flex-wrap: wrap;
+    padding: 0px 20px;
+    gap: 20px;
+    height: auto;
   }
 `;
