@@ -92,8 +92,7 @@ const List = styled.div<ListStyledContainer>`
   }
 
   @media (max-width: 480px) {
-    min-height: ${({ employeeList }) =>
-      employeeList.length ? "40vh" : "auto"};
+    min-height: auto;
     max-height: ${({ employeeList }) =>
       employeeList.length ? "40vh" : "auto"};
     margin-bottom: 5px;
