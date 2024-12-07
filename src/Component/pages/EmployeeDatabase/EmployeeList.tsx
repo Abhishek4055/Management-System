@@ -51,14 +51,12 @@ const ListContainer = styled.div<ListStyledContainer>`
   width: 40%;
   min-height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
   max-height: ${({ employeeList }) => (employeeList.length ? "90vh" : "auto")};
-  /* max-height: 100vh; */
   box-sizing: border-box;
   border-radius: 10px;
   padding: 0 10px;
   border: none;
   text-align: center;
   box-shadow: inset 0 0 10px #565f71;
-  /* position: relative; */
 
   @media (max-width: 480px) {
     width: 100%;
