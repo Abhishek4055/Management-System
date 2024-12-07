@@ -7,7 +7,7 @@ interface AxiosModule {
 }
 
 const useAxios = ({ url, config = {} }: AxiosModule) => {
-  const [data, setData] = useState<any>(null); // Change [] to null (empty response)
+  const [data, setData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,9 +29,10 @@ const useAxios = ({ url, config = {} }: AxiosModule) => {
   };
 
   useEffect(() => {
-    if (!url) return;
-    getData();
-  }, [url]); // Avoid using `config` as a dependency to prevent infinite loop
+    if (url) {
+      getData();
+    }
+  }, [url]);
 
   return { data, isLoading, error };
 };
