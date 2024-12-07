@@ -14,7 +14,7 @@ function EmployeeDetails(props: {
     <DetailsContainer className="employee__details" employee={employee}>
       <DetailsHeader>
         <h2 className="employee__details--header">Employee Details</h2>
-        {isLoading && employee?.id && (
+        {!isLoading && employee?.id && (
           <EditIcon onClick={() => detailsEditHandler(employee)}>📝</EditIcon>
         )}
       </DetailsHeader>
