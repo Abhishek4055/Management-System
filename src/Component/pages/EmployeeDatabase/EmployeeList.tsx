@@ -1,43 +1,52 @@
 import React from "react";
 import { EmployeeListModel } from "../../modal";
 import styled from "styled-components";
+import LoadingPage from "../../utils/LoadingPage";
 // import { AiFillDelete } from "react-icons/ai";
 
 function EmployeeList(props: {
-  // employee: EmployeeListModel;
   activeEmployee: number | undefined;
   employeeList: EmployeeListModel[];
   employeeItemHandler: any;
+  isLoading?: boolean;
 }) {
-  const { employeeList, employeeItemHandler, activeEmployee } = props;
+  const { employeeList, employeeItemHandler, activeEmployee, isLoading } =
+    props;
   return (
     <ListContainer employeeList={employeeList}>
-      <h2 className="employee__list--header">Employee List</h2>
-      <List onClick={employeeItemHandler} id="id" employeeList={employeeList}>
-        {employeeList?.map((item) => (
-          <div
-            className={`employee__list_item ${
-              activeEmployee === item.id ? "active" : ""
-            }`}
-            key={item.id}
-            id={`${item.id?.toString()}_addUser`}
-          >
-            <span
-              className="employee__list--item--text "
+      <ListHeader>
+        <h2 className="employee__list--header">Employee List</h2>
+      </ListHeader>
+
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <List onClick={employeeItemHandler} id="id" employeeList={employeeList}>
+          {employeeList?.map((item) => (
+            <div
+              className={`employee__list_item ${
+                activeEmployee === item.id ? "active" : ""
+              }`}
+              key={item.id}
               id={`${item.id?.toString()}_addUser`}
             >
-              {item.fName + " " + item.lName}
-            </span>
-            <IconButton
-              className="employee__list--item--icon"
-              id={`${item.id?.toString()}_delete`}
-            >
-              ❌
-              {/* <AiFillDelete id={item.id.toString() + "_" + "delete"} /> */}
-            </IconButton>
-          </div>
-        ))}
-      </List>
+              <span
+                className="employee__list--item--text "
+                id={`${item.id?.toString()}_addUser`}
+              >
+                {item.fName + " " + item.lName}
+              </span>
+              <IconButton
+                className="employee__list--item--icon"
+                id={`${item.id?.toString()}_delete`}
+              >
+                ❌
+                {/* <AiFillDelete id={item.id.toString() + "_" + "delete"} /> */}
+              </IconButton>
+            </div>
+          ))}
+        </List>
+      )}
     </ListContainer>
   );
 }
@@ -70,6 +79,16 @@ const ListContainer = styled.div<ListStyledContainer>`
   }
 `;
 
+const ListHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+
+  @media (max-width: 480px) {
+    /* justify-content: flex-start; */
+  }
+`;
 const List = styled.div<ListStyledContainer>`
   width: 100%;
   min-height: ${({ employeeList }) => (employeeList.length ? "73vh" : "auto")};

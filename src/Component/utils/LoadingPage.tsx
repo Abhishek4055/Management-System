@@ -1,27 +1,18 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const LoadingPage: React.FC<{ message?: string }> = ({ message }) => (
-  <LoadingContainer>
-    {message && (
-      <h2>
-        {message}
-        <AnimatedDots>
-          <Dot>.</Dot>
-          <Dot delay="0.2s">.</Dot>
-          <Dot delay="0.4s">.</Dot>
-        </AnimatedDots>
-      </h2>
-    )}
-  </LoadingContainer>
+const LoadingPage: React.FC = () => (
+  // <LoadingContainer>
+  <h2>
+    Loading
+    <AnimatedDots>
+      <Dot>.</Dot>
+      <Dot delay="0.2s">.</Dot>
+      <Dot delay="0.4s">.</Dot>
+    </AnimatedDots>
+  </h2>
+  // </LoadingContainer>
 );
-
-const LoadingContainer = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 // Keyframe animation for dot color
 const dotBlink = keyframes`

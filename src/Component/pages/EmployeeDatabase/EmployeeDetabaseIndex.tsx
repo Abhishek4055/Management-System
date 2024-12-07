@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import useAxios from "../../customHooks/axiosApiCall";
 import styled from "styled-components";
 import EmployeeList from "./EmployeeList";
 import { EmployeeListModel } from "../../modal";
@@ -6,6 +7,9 @@ import EmployeeDetails from "./EmployeeDetails";
 import EmployeeIForm from "./EmployeeIForm";
 
 const EmployeeDetabaseIndex = () => {
+  const { data, isLoading } = useAxios({
+    url: "../../../.././data.json",
+  });
   const [employeeList, setEmployeeList] = useState<EmployeeListModel[]>([]);
   const [employee, setEmployee] = useState<EmployeeListModel | null>(null);
   const [activeEmployee, setActiveEmployee] = useState<number | undefined>(0);
@@ -23,15 +27,12 @@ const EmployeeDetabaseIndex = () => {
     setIsEdit(false);
   };
 
-  const getEmployeeList = async () => {
-    try {
-      const response = await fetch("../../../.././data.json");
-      const data = await response.json();
+  // get Employee list data
+  useEffect(() => {
+    if (data) {
       setEmployeeList(data);
-    } catch (e) {
-      console.log(e);
     }
-  };
+  }, [data]);
 
   const employeeItemHandler = useCallback(
     (e: any) => {
@@ -54,10 +55,6 @@ const EmployeeDetabaseIndex = () => {
     },
     [employeeList]
   );
-
-  useEffect(() => {
-    getEmployeeList();
-  }, []);
 
   useEffect(() => {
     let setOfId = new Set();
@@ -122,12 +119,13 @@ const EmployeeDetabaseIndex = () => {
 
       <Container>
         <EmployeeList
-          // employee={employee}
+          isLoading={isLoading}
           activeEmployee={activeEmployee}
           employeeList={employeeList}
           employeeItemHandler={employeeItemHandler}
         />
         <EmployeeDetails
+          isLoading={isLoading}
           employee={employee}
           detailsEditHandler={detailsEditHandler}
         />
@@ -189,7 +187,7 @@ const StypledButton = styled.button`
 `;
 
 const Container = styled.div`
-  padding: 0px 50px;
+  padding: 0px 50px 25px 50px;
   display: flex;
   align-items: flex-start;
   justify-content: center;

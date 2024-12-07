@@ -3,6 +3,7 @@ import HeaderComp from "./Component/navPages/header";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.scss";
 import LoadingPage from "./Component/utils/LoadingPage";
+import styled from "styled-components";
 
 // Lazy-loaded components
 const Home = lazy(() => import("./Component/navPages/Home"));
@@ -23,6 +24,12 @@ const ErrorPage: React.FC<{ message: string }> = ({ message }) => (
   </>
 );
 
+const LoadingContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 // Routes configuration
 const route = createBrowserRouter([
   {
@@ -40,7 +47,13 @@ const route = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <EmployeeDetabaseIndex />
           </Suspense>
         ),
@@ -48,7 +61,13 @@ const route = createBrowserRouter([
       {
         path: "home",
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <Home />
           </Suspense>
         ),
@@ -57,7 +76,13 @@ const route = createBrowserRouter([
       {
         path: "order_summary",
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <OrderSummery />
           </Suspense>
         ),
@@ -66,7 +91,13 @@ const route = createBrowserRouter([
       {
         path: "toDoes",
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <ToDoes />
           </Suspense>
         ),
@@ -75,7 +106,13 @@ const route = createBrowserRouter([
       {
         path: "employeeDatabese",
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <EmployeeDetabaseIndex />
           </Suspense>
         ),
@@ -84,7 +121,13 @@ const route = createBrowserRouter([
       {
         path: "about",
         element: (
-          <Suspense fallback={<LoadingPage message="Loading" />}>
+          <Suspense
+            fallback={
+              <LoadingContainer>
+                <LoadingPage />
+              </LoadingContainer>
+            }
+          >
             <About />
           </Suspense>
         ),
