@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 interface AxiosModule {
   url: string;
-  config?: AxiosRequestConfig; // Use AxiosRequestConfig for proper type definition
+  config?: AxiosRequestConfig;
 }
 
 const useAxios = ({ url, config = {} }: AxiosModule) => {
@@ -19,15 +19,13 @@ const useAxios = ({ url, config = {} }: AxiosModule) => {
         const response = await axios({ url, ...config });
         setData(response.data);
       } catch (err: unknown) {
-        if (axios.isAxiosError(err)) {
-          setError(err.response?.data?.message || "An error occurred");
-        } else {
-          setError("An unknown error occurred");
-        }
+        // console.log(err?.response?.data?.message);
+        setError("An  error occurred");
       } finally {
         setIsLoading(false);
       }
     };
+
     if (url) {
       getData();
     }
