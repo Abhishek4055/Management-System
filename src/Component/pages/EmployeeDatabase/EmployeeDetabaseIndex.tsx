@@ -78,7 +78,7 @@ const EmployeeDetabaseIndex = () => {
       setEmployee(employeeList[0]);
       setActiveEmployee(employeeList[0]?.id);
     }
-  }, [employeeList, setActiveEmployee]);
+  }, [employee, employeeList, setActiveEmployee]);
 
   // update edit form input
   const detailsEditHandler = useCallback(
@@ -109,7 +109,7 @@ const EmployeeDetabaseIndex = () => {
       }
       if (formData) return true;
     },
-    [isEdit, setEmployee, setActiveEmployee]
+    [isEdit, employeeList]
   );
 
   console.log("isEdit", isEdit, employeeList);
