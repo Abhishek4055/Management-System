@@ -6,7 +6,7 @@ interface AxiosModule {
   config?: AxiosRequestConfig;
 }
 
-const useAxios = ({ url, config = {} }: AxiosModule) => {
+const useAxios = ({ url }: AxiosModule) => {
   const [data, setData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +16,7 @@ const useAxios = ({ url, config = {} }: AxiosModule) => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios({ url, ...config });
+        const response = await axios({ url });
         setData(response.data);
       } catch (err: unknown) {
         // console.log(err?.response?.data?.message);
