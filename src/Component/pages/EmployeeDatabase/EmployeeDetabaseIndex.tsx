@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useAxios from "../../customHooks/axiosApiCall";
+import useAxiosAPICall from "../../customHooks/axiosApiCall";
 import styled from "styled-components";
 import EmployeeList from "./EmployeeList";
 import { EmployeeListModel } from "../../modal";
 import EmployeeDetails from "./EmployeeDetails";
 import EmployeeIForm from "./EmployeeIForm";
+import { RootState } from "Redux/reduxStore";
+import { useSelector } from "react-redux";
 
 const EmployeeDetabaseIndex = () => {
-  const { data, isLoading } = useAxios({
+  // const { isLoading } = useSelector((state: RootState) => state?.swiggyData);
+  const { data, isLoading, error } = useAxiosAPICall({
     url: "../../../.././data.json",
+    method: "get",
   });
   const [employeeList, setEmployeeList] = useState<EmployeeListModel[]>([]);
   const [employee, setEmployee] = useState<EmployeeListModel | null>(null);

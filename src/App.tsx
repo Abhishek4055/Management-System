@@ -1,28 +1,144 @@
 import React, { lazy, Suspense } from "react";
-import HeaderComp from "./Component/navPages/header";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.scss";
-import LoadingPage from "./Component/utils/LoadingPage";
 import styled from "styled-components";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import HeaderComp from "./Component/navPages/header";
+import LoadingPage from "./Component/utils/LoadingPage";
+import ErrorBoundery from "Component/utils/ErrorBoundery";
+import YoutubleIndex from "Component/pages/YouTuble/Index/YoutubleIndex";
+import ErrorPage from "Component/utils/ErrorPage";
+import { ERROR_MESSAGE } from "Component/config";
+import RestroCollection from "Component/pages/Swiggy/utils/RestroCollection";
+// import RestaureantWithFood from "Component/pages/Swiggy/SwiggyPages/Rasturent/RestaureantWithFood";
 
 // Lazy-loaded components
 const Home = lazy(() => import("./Component/navPages/Home"));
 const About = lazy(() => import("./Component/navPages/About"));
 const OrderSummery = lazy(() => import("./Component/pages/OrderSummery"));
 const ToDoes = lazy(() => import("./Component/pages/todo/ToDoes"));
-const EmployeeDetabaseIndex = lazy(
+const EmployeeDatabaseIndex = lazy(
   () => import("./Component/pages/EmployeeDatabase/EmployeeDetabaseIndex")
 );
-
-const ERROR_MESSAGE = "Found something wrong ...404";
-
-// Error component
-const ErrorPage: React.FC<{ message: string }> = ({ message }) => (
-  <>
-    <h3>Oops!...</h3>
-    <p>{message}</p>
-  </>
+const SwiggyHeader = lazy(
+  () => import("./Component/pages/Swiggy/SwiggyHeader")
 );
+const SwiggyIndex = lazy(() => import("./Component/pages/Swiggy/SwiggyIndex"));
+const ZomatoIndex = lazy(() => import("./Component/pages/Zomato/ZomatoIndex"));
+
+// Home Layout
+const HomeLayout: React.FC = () => (
+  <div className="App">
+    <ErrorBoundery>
+      <HeaderComp />
+    </ErrorBoundery>
+    <div className="app-body">
+      <ErrorBoundery>
+        <Suspense
+          fallback={
+            <LoadingContainer>
+              <LoadingPage />
+            </LoadingContainer>
+          }
+        >
+          <Outlet />
+        </Suspense>
+      </ErrorBoundery>
+    </div>
+  </div>
+);
+
+const SwiggyLayout = () => {
+  return (
+    <SwiggyMain className="swiggy_layout">
+      <ErrorBoundery>
+        <SwiggyHeader />
+      </ErrorBoundery>
+      <ErrorBoundery>
+        <Suspense
+          fallback={
+            <LoadingContainer>
+              <LoadingPage />
+            </LoadingContainer>
+          }
+        >
+          <Outlet />
+        </Suspense>
+      </ErrorBoundery>
+    </SwiggyMain>
+  );
+};
+
+// Routes configuration
+const route = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "order_summary",
+        element: <OrderSummery />,
+      },
+      {
+        path: "toDoes",
+        element: <ToDoes />,
+      },
+      {
+        path: "employeeDatabase",
+        element: <EmployeeDatabaseIndex />,
+      },
+    ],
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
+  },
+  {
+    path: "/swiggy_restaurants",
+    element: <SwiggyLayout />,
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
+    children: [
+      {
+        index: true,
+        element: <SwiggyIndex />,
+      },
+      {
+        path: "collection/:id",
+        element: <RestroCollection />,
+      },
+    ],
+  },
+
+  {
+    path: "/zomato",
+    element: <ZomatoIndex />,
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
+  },
+  {
+    path: "/youtuble",
+    element: <YoutubleIndex />,
+    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
+  },
+]);
+
+const App: React.FC = () => {
+  return (
+    <Suspense
+      fallback={
+        <LoadingContainer>
+          <LoadingPage />
+        </LoadingContainer>
+      }
+    >
+      <RouterProvider router={route} />
+    </Suspense>
+  );
+};
 
 const LoadingContainer = styled.div`
   height: 100vh;
@@ -30,115 +146,14 @@ const LoadingContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-// Routes configuration
-const route = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <div className="App">
-        <HeaderComp />
-        <div className="app-body">
-          <Outlet />
-        </div>
-      </div>
-    ),
-    errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <EmployeeDetabaseIndex />
-          </Suspense>
-        ),
-      },
-      {
-        path: "home",
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <Home />
-          </Suspense>
-        ),
-        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-      },
-      {
-        path: "order_summary",
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <OrderSummery />
-          </Suspense>
-        ),
-        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-      },
-      {
-        path: "toDoes",
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <ToDoes />
-          </Suspense>
-        ),
-        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-      },
-      {
-        path: "employeeDatabese",
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <EmployeeDetabaseIndex />
-          </Suspense>
-        ),
-        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-      },
-      {
-        path: "about",
-        element: (
-          <Suspense
-            fallback={
-              <LoadingContainer>
-                <LoadingPage />
-              </LoadingContainer>
-            }
-          >
-            <About />
-          </Suspense>
-        ),
-        errorElement: <ErrorPage message={ERROR_MESSAGE} />,
-      },
-    ],
-  },
-]);
 
-const App: React.FC = () => {
-  return <RouterProvider router={route} />;
-};
+const SwiggyMain = styled.div`
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default App;
